@@ -2,6 +2,7 @@ package com.rathserver.teamchat.configure;
 
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,7 @@ public class YamlConfig extends Utf8YamlConfiguration {
     private final List<String> exclusionTeams = new ArrayList<>();
 
     @Getter
+    @Setter
     private boolean teamChat = false;
 
     public YamlConfig(@NonNull JavaPlugin plugin) {
