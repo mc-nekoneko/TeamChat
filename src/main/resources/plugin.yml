@@ -1,3 +1,15 @@
 name: TeamChat
 version: ${project.version}
 main: com.rathserver.teamchat.TeamChatPlugin
+author: Nekoneko
+website: https://www.nekonekoserver.net
+description: Scoreboard TeamChat plugin.
+commands:
+  teamchat:
+    usage: /teamchat <on/off/displayname/exclusion>
+    aliases: tc
+    permission: teamchat.command
+    description: TeamChat Toggle command.
+permissions:
+  teamchat.command:
+    default: op
