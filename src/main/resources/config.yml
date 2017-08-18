@@ -1,0 +1,5 @@
+teamchat: true
+displaynames:
+  example: ・み・
+exclusion:
+  - admin

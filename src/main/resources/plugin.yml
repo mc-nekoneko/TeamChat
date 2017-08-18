@@ -1,0 +1,3 @@
+name: TeamChat
+version: ${project.version}
+main: com.rathserver.teamchat.TeamChatPlugin
