@@ -1,8 +1,8 @@
 package com.rathserver.teamchat.listener;
 
 import com.rathserver.teamchat.TeamChatPlugin;
+import com.rathserver.teamchat.util.StringUtil;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -51,10 +51,6 @@ public final class ChatListener implements Listener {
 
     private String format(Team team) {
         String displayName = plugin.getYamlConfig().getDisplayName(team.getName()).orElse(team.getDisplayName());
-        return colored("&7[&r" + displayName + "&r&7]&r %s&7:&r %s");
-    }
-
-    private String colored(String str) {
-        return ChatColor.translateAlternateColorCodes('&', str);
+        return StringUtil.coloring("&7[&r" + displayName + "&r&7]&r %s&7:&r %s");
     }
 }
