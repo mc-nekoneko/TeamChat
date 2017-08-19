@@ -20,3 +20,5 @@ permissions:
     default: op
   teamchat.globalchat:
     default: true
+  teamchat.bypass:
+    default: op

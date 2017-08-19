@@ -10,7 +10,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Nekoneko on 2017/08/19.
@@ -40,11 +42,15 @@ public final class ChatListener implements Listener {
 
         event.setFormat(format(team));
         Set<Player> recipients = event.getRecipients();
-        recipients.stream().filter(o -> hasEntryAndNotOp(team, o)).forEach(recipients::remove);
+        recipients.removeAll(exclusion(player, team, recipients));
     }
 
-    private boolean hasEntryAndNotOp(Team team, Player player) {
-        return team.hasEntry(player.getName()) && !player.isOp();
+    private Collection<Player> exclusion(Player sender, Team senderTeam, Set<Player> recipients) {
+        return recipients.stream().filter(player -> !player.equals(sender)).filter(player -> notEntryAndNotHavePermission(player, senderTeam)).collect(Collectors.toSet());
+    }
+
+    private boolean notEntryAndNotHavePermission(Player player, Team team) {
+        return !team.hasEntry(player.getName()) && !player.hasPermission("teamchat.bypass");
     }
 
     private Team getTeam(Player player) {
