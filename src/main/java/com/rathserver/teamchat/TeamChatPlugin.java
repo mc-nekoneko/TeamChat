@@ -1,5 +1,6 @@
 package com.rathserver.teamchat;
 
+import com.rathserver.teamchat.command.CommandTeamChat;
 import com.rathserver.teamchat.configure.YamlConfig;
 import com.rathserver.teamchat.listener.ChatListener;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public final class TeamChatPlugin extends JavaPlugin {
         super.onEnable();
         yamlConfig = new YamlConfig(this);
         yamlConfig.load();
+        getCommand("teamchat").setExecutor(new CommandTeamChat(this));
         getServer().getPluginManager().registerEvents(new ChatListener(this), this);
     }
 
