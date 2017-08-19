@@ -50,10 +50,10 @@ public class YamlConfig extends Utf8YamlConfiguration {
 
     public void save() {
         try {
-            save(ymlFile);
             displayNames.forEach(this::save);
             set("exclusion", exclusionTeams);
             set("teamchat", teamChat);
+            save(ymlFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
