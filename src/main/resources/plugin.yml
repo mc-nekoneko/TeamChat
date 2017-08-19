@@ -10,6 +10,13 @@ commands:
     aliases: tc
     permission: teamchat.command
     description: TeamChat Toggle command.
+  globalchat:
+    aliases: g
+    usage: /g <message>
+    permission: teamchat.globalchat
+    description: Global chat!
 permissions:
   teamchat.command:
     default: op
+  teamchat.globalchat:
+    default: true
