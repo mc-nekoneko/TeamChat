@@ -24,6 +24,10 @@ public class CommandTeamChat implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+        if (!sender.hasPermission("teamchat.command")) {
+            sender.sendMessage(ChatColor.RED + "You do not have permission.");
+            return true;
+        }
         if (args.length == 0) {
             sender.sendMessage(ChatColor.YELLOW + cmd.getUsage());
             return true;

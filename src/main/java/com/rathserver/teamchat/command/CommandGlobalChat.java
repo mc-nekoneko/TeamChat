@@ -21,6 +21,10 @@ public class CommandGlobalChat implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "can be executed only from player");
             return true;
         }
+        if (!sender.hasPermission("teamchat.globalchat")) {
+            sender.sendMessage(ChatColor.RED + "You do not have permission.");
+            return true;
+        }
         if (args.length == 0) {
             sender.sendMessage(ChatColor.YELLOW + cmd.getUsage());
             return true;
