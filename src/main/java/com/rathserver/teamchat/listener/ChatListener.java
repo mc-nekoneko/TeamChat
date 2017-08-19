@@ -22,7 +22,7 @@ public final class ChatListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void asyncPlayerChat(AsyncPlayerChatEvent event) {
-        event.setFormat("%s&7:&r %s");
+        event.setFormat(StringUtil.coloring("%s&7:&r %s"));
         if (plugin.getYamlConfig().isTeamChat()) {
             teamChat(event);
         }
