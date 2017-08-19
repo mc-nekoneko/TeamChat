@@ -22,10 +22,13 @@ public final class ChatListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void asyncPlayerChat(AsyncPlayerChatEvent event) {
-        if (!plugin.getYamlConfig().isTeamChat()) {
-            return;
+        event.setFormat("%s&7:&r %s");
+        if (plugin.getYamlConfig().isTeamChat()) {
+            teamChat(event);
         }
+    }
 
+    private void teamChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         Team team = getTeam(player);
         if (team == null) {
