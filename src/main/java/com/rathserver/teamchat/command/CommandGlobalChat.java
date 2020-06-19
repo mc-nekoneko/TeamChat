@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
  */
 public class CommandGlobalChat implements CommandExecutor {
 
-    private final String template = StringUtil.coloring("%s&7:&r %s");
+    private static final String TEMPLATE = StringUtil.coloring("%s&7:&r %s");
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
@@ -35,6 +35,6 @@ public class CommandGlobalChat implements CommandExecutor {
     }
 
     private String format(String name, String message) {
-        return String.format(template, name, message);
+        return String.format(TEMPLATE, name, message);
     }
 }
