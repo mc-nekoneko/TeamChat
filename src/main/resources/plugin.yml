@@ -4,6 +4,7 @@ main: com.rathserver.teamchat.TeamChatPlugin
 author: Nekoneko
 website: https://www.nekonekoserver.net
 description: Scoreboard TeamChat plugin.
+api-version: 1.13
 commands:
   teamchat:
     usage: /teamchat <on/off/displayname/exclusion>
