@@ -14,17 +14,10 @@ public final class TeamChatPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        super.onEnable();
-        yamlConfig = new YamlConfig(this);
-        yamlConfig.load();
-        getCommand("globalchat").setExecutor(new CommandGlobalChat());
-        getCommand("teamchat").setExecutor(new CommandTeamChat(this));
-        getServer().getPluginManager().registerEvents(new ChatListener(this), this);
-    }
-
-    @Override
-    public void onDisable() {
-        super.onDisable();
-        yamlConfig.save();
+        this.yamlConfig = new YamlConfig(this);
+        this.yamlConfig.load();
+        this.getCommand("globalchat").setExecutor(new CommandGlobalChat());
+        this.getCommand("teamchat").setExecutor(new CommandTeamChat(this));
+        this.getServer().getPluginManager().registerEvents(new ChatListener(this), this);
     }
 }

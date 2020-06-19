@@ -3,6 +3,7 @@ package com.rathserver.teamchat.listener;
 import com.rathserver.teamchat.TeamChatPlugin;
 import com.rathserver.teamchat.util.StringUtil;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,23 +25,27 @@ public final class ChatListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void asyncPlayerChat(AsyncPlayerChatEvent event) {
-        event.setFormat(StringUtil.coloring("%s&7:&r %s"));
-        if (plugin.getYamlConfig().isTeamChat()) {
-            teamChat(event);
+        if (this.plugin.getYamlConfig().isTeamChat()) {
+            this.teamChat(event);
+        } else {
+            Player player = event.getPlayer();
+            Team team = player.getScoreboard().getEntryTeam(player.getName());
+            ChatColor color = team != null ? this.plugin.getYamlConfig().getTeamColor(team.getName()) : ChatColor.RESET;
+            event.setFormat(StringUtil.coloring(color + "%s&7:&r %s"));
         }
     }
 
     private void teamChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
-        Team team = getTeam(player);
+        Team team = this.getTeam(player);
         if (team == null) {
             return;
         }
-        if (plugin.getYamlConfig().isExclusionTeam(team.getName())) {
+        if (this.plugin.getYamlConfig().isExclusionTeam(team.getName())) {
             return;
         }
 
-        event.setFormat(format(team));
+        event.setFormat(this.format(team));
         Set<Player> recipients = event.getRecipients();
         recipients.removeAll(exclusion(player, team, recipients));
     }
@@ -59,7 +64,8 @@ public final class ChatListener implements Listener {
     }
 
     private String format(Team team) {
-        String displayName = plugin.getYamlConfig().getDisplayName(team.getName()).orElse(team.getDisplayName());
-        return StringUtil.coloring("&7[&r" + displayName + "&r&7]&r %s&7:&r %s");
+        String displayName = this.plugin.getYamlConfig().getDisplayName(team.getName()).orElse(team.getDisplayName());
+        ChatColor color = this.plugin.getYamlConfig().getTeamColor(team.getName());
+        return StringUtil.coloring("&7[&r" + displayName + "&r&7]&r " + color + "%s&7:&r %s");
     }
 }

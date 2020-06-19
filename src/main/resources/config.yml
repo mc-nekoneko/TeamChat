@@ -8,3 +8,7 @@ displaynames:
 #チームチャットから除外する
 exclusion:
   - admin
+
+#チームの色を設定する
+teamscolor:
+  example: BLUE
