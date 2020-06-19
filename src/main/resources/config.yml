@@ -1,14 +1,6 @@
 #チームチャットを有効にするかどうか <true/false>
 teamchat: true
 
-#チームの表示名を変更
-displaynames:
-  example: ・み・
-
 #チームチャットから除外する
 exclusion:
   - admin
-
-#チームの色を設定する
-teamscolor:
-  example: BLUE

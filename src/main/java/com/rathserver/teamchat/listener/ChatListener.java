@@ -30,7 +30,7 @@ public final class ChatListener implements Listener {
         } else {
             Player player = event.getPlayer();
             Team team = player.getScoreboard().getEntryTeam(player.getName());
-            ChatColor color = team != null ? this.plugin.getYamlConfig().getTeamColor(team.getName()) : ChatColor.RESET;
+            ChatColor color = team != null ? team.getColor() : ChatColor.RESET;
             event.setFormat(StringUtil.coloring(color + "%s&7:&r %s"));
         }
     }
@@ -60,12 +60,12 @@ public final class ChatListener implements Listener {
 
     private Team getTeam(Player player) {
         Scoreboard board = player.getScoreboard();
-        return board != null ? board.getEntryTeam(player.getName()) : null;
+        return board.getEntryTeam(player.getName());
     }
 
     private String format(Team team) {
-        String displayName = this.plugin.getYamlConfig().getDisplayName(team.getName()).orElse(team.getDisplayName());
-        ChatColor color = this.plugin.getYamlConfig().getTeamColor(team.getName());
+        String displayName = team.getDisplayName();
+        ChatColor color = team.getColor();
         return StringUtil.coloring("&7[&r" + displayName + "&r&7]&r " + color + "%s&7:&r %s");
     }
 }

@@ -1,7 +1,6 @@
 package com.rathserver.teamchat.command;
 
 import com.rathserver.teamchat.TeamChatPlugin;
-import com.rathserver.teamchat.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -32,14 +31,8 @@ public class CommandTeamChat implements TabExecutor {
             sender.sendMessage(ChatColor.YELLOW + cmd.getUsage());
             return true;
         }
-        if (args[0].equalsIgnoreCase("displayname")) {
-            return this.displayName(sender, args);
-        }
         if (args[0].equalsIgnoreCase("exclusion")) {
             return this.exclusion(sender, args);
-        }
-        if (args[0].equalsIgnoreCase("color")) {
-            return this.color(sender, args);
         }
 
         boolean teamChat = bool(args[0]);
@@ -52,32 +45,13 @@ public class CommandTeamChat implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String s, String[] args) {
         if (args.length == 1) {
-            return Arrays.asList("on", "off", "displayname", "exclusion", "color");
+            return Arrays.asList("on", "off", "exclusion");
         }
         if (args.length == 2) {
             Scoreboard board = this.plugin.getServer().getScoreboardManager().getMainScoreboard();
             return board.getTeams().parallelStream().map(Team::getName).collect(Collectors.toList());
         }
         return null;
-    }
-
-    private boolean displayName(CommandSender sender, String[] args) {
-        if (args.length <= 1) {
-            sender.sendMessage(ChatColor.YELLOW + "/teamchat displayname <team> <display_name>");
-            return true;
-        }
-
-        String team = args[1];
-        if (team.length() > 16) {
-            sender.sendMessage(ChatColor.RED + String.format("The name '%s' is too long for a team, it can be at most 16 characters long", team));
-            return true;
-        }
-
-        String displayName = StringUtil.join(" ", 2, args);
-        this.plugin.getYamlConfig().setDisplayName(team, displayName);
-        this.plugin.getYamlConfig().save();
-        sender.sendMessage(ChatColor.GREEN + String.format("The display name of '%s' team has been changed to '%s'", team, displayName));
-        return true;
     }
 
     private boolean exclusion(CommandSender sender, String[] args) {
@@ -95,32 +69,6 @@ public class CommandTeamChat implements TabExecutor {
         this.plugin.getYamlConfig().addExclusionTeam(team);
         this.plugin.getYamlConfig().save();
         sender.sendMessage(ChatColor.GREEN + String.format("'%s' team has been excluded from team chat", team));
-        return true;
-    }
-
-    private boolean color(CommandSender sender, String[] args) {
-        if (args.length <= 1) {
-            sender.sendMessage(ChatColor.YELLOW + "/teamchat color <team> <color>");
-            return true;
-        }
-
-        String team = args[1];
-        if (team.length() > 16) {
-            sender.sendMessage(ChatColor.RED + String.format("The name '%s' is too long for a team, it can be at most 16 characters long", team));
-            return true;
-        }
-
-        ChatColor color;
-        try {
-            color = ChatColor.valueOf(args[2]);
-        } catch (IllegalArgumentException ex) {
-            sender.sendMessage(ChatColor.RED + ex.getLocalizedMessage());
-            return true;
-        }
-
-        this.plugin.getYamlConfig().setTeamColor(team, color);
-        this.plugin.getYamlConfig().save();
-        sender.sendMessage(ChatColor.GREEN + "");
         return true;
     }
 

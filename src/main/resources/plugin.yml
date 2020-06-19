@@ -7,7 +7,7 @@ description: Scoreboard TeamChat plugin.
 api-version: 1.13
 commands:
   teamchat:
-    usage: /teamchat <on/off/displayname/exclusion>
+    usage: /teamchat <on/off/exclusion>
     aliases: tc
     permission: teamchat.command
     description: TeamChat Toggle command.
