@@ -87,7 +87,7 @@ public class CommandTeamChat implements TabExecutor {
             return true;
         }
 
-        plugin.getYamlConfig().addExlusionTeam(team);
+        this.plugin.getYamlConfig().addExclusionTeam(team);
         sender.sendMessage(ChatColor.GREEN + String.format("'%s' team has been excluded from team chat", team));
         return true;
     }

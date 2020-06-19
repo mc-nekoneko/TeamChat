@@ -75,8 +75,8 @@ public class YamlConfig extends Utf8YamlConfiguration {
         return exclusionTeams.contains(team);
     }
 
-    public void addExlusionTeam(@NonNull String name) {
-        exclusionTeams.add(name);
+    public void addExclusionTeam(@NonNull String name) {
+        this.exclusionTeams.add(name);
     }
 
     private void put(String team) {
