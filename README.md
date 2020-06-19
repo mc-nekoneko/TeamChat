@@ -13,3 +13,5 @@
 - /g <message>                                - 全体チャット
 
 ※表示名や例外を削除するにはconfig.ymlを変更してください
+
+[ダウンロード](https://github.com/mc-nekoneko/TeamChat/releases/latest/download/TeamChat.jar)
